@@ -1,0 +1,10 @@
+service\ClientService.class
+Main.class
+service\EstateService.class
+entity\Client.class
+entity\Realtor.class
+entity\Client.class
+entity\Deal.class
+service\DealService.class
+services\RealtorService.class
+entity\Estate.class

@@ -10,17 +10,6 @@ import java.util.UUID;
 
 public interface EstateRepository extends JpaRepository<Estate, UUID>{
 
-
-    Estate getAddress();
-    Estate getEstate();
-
-    @Query("SELECT e FROM Estate e WHERE e.address = :name")
-    static String findEstateByAddress(@Param("address") String address) { return address; }
-
-    @Query("SELECT e FROM Estate e INNER JOIN estateWishList e ON e.id = e.id WHERE e.id > 0")
-    static List<Estate> getEstatesWishList() {
-        return getEstatesWishList();
-    }
-
-
+    @Query("SELECT e FROM Estate e WHERE e.address = :address")
+    Estate findEstateByAddress(@Param("address") String address);
 }

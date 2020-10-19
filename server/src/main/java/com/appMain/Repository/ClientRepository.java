@@ -8,9 +8,4 @@ import java.util.UUID;
 
 public interface ClientRepository extends JpaRepository<Client, UUID> {
 
-    String getFirstName();
-    String getLastName();
-    Double getPrice();
-    List<Client> getEstateWishList();
-    Client getClientByEmail();
 }

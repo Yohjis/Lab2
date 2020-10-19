@@ -38,10 +38,10 @@ public class DealService {
         List<Estate> toDeal = new ArrayList<>();
         for (Estate e : address) {
             if (client.getCash() < e.getPrice()) {
-                System.out.println("Client(" + clientRepository.getFirstName() + " " + clientRepository.getLastName()
-                        + ") price which can spend is " + clientRepository.getPrice() + ". \n Them can't reserve " + estateRepository.getEstate());
+                System.out.println("Client(" + client.getFirstName() + " " + client.getLastName()
+                        + ") price which can spend is " + e.getPrice() + ". \n Them can't reserve " + e.getAddress());
             } else {
-                String estate = EstateRepository.findEstateByAddress(e.getAddress());
+                Estate estate = estateRepository.findEstateByAddress(e.getAddress());
                 if (estate == null) {
                     continue;
                 }
@@ -52,7 +52,7 @@ public class DealService {
                     dealRepository.save(deal);
                 } else {
                     System.out.println("There is no " + e.getAddress() + ". It has been sold already.");
-                    estateRepository.delete(estateRepository.getAddress());
+                    estateRepository.delete(estate);
                 }
             }
         }

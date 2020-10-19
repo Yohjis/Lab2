@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("deals")
 public class DealController{
@@ -38,5 +37,4 @@ public class DealController{
         dealsDTO.setAllDeals(dealService.getAllDeals());
     return dealsDTO;
     }
-
 }

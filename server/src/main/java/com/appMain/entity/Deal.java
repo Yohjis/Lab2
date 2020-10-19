@@ -1,7 +1,5 @@
 package com.appMain.entity;
 
-import org.springframework.data.annotation.Id;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,8 +9,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "deals")
-    public class Deal {
-    @javax.persistence.Id
+public class Deal {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -20,34 +17,31 @@ import java.util.UUID;
     @JoinTable(name = "deal_estate",
             joinColumns = @JoinColumn(name = "deal_id"),
             inverseJoinColumns = @JoinColumn(name = "estate_id"))
-
+    private List<Estate> EstateInDeal;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "deal_id")
-
-
-    private Double price;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "estate_id")
+    @JoinColumn(name = "client_id")
     private Client client;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "realtor_id")
     private Realtor realtor;
     private String address;
+    private Double price;
 
     @Transient
     private LocalDateTime dealDate;
 
-
-
-    public Deal(Estate estate, Client client, Realtor realtor) {
-        defineDeal();
-        this.client = client;
-        this.realtor = realtor;
-        this.price = estate.getPrice();
-        this.address= estate.getAddress();
-    }
-
     public Deal() {
 
     }
+
+    public Deal(Estate estate, Client client, Realtor realtor) {
+        this.client = client;
+        this.realtor = realtor;
+        this.EstateInDeal = EstateInDeal;
+        this.price = price;
+        this.address= address;
+    }
+
 
     private void defineDeal() {
         this.id = UUID.randomUUID();
@@ -56,23 +50,18 @@ import java.util.UUID;
     public UUID getDealId() {
         return id;
     }
-
     public ArrayList<Estate> getEstateInDeal() {
         return getEstateInDeal();
     }
     public Realtor getRealtor(){return realtor;}
     public Client getClient() { return client; }
-    public Double getPrice() { return price; }
     public LocalDateTime getDealDate() { return dealDate; }
-    public String getAddress(){return address;}
-    public Double setPrice(){return price;}
     public LocalDateTime setDealDate (){ return dealDate; }
     public Client setClient(){return client;}
     public Realtor setRealtor(){return realtor;}
     public List<Deal> setDealId(List<Deal> dealId) {
         return dealId;
     }
-    public String setAddress(){return address;}
     public Double getCountPrice(List<Estate> estates) { return estates.stream().mapToDouble(Estate::getPrice).sum(); }
 
 
@@ -84,4 +73,5 @@ import java.util.UUID;
         this.price = price;
         this.address = address;
     }
+
 }

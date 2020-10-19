@@ -16,7 +16,7 @@ public class EstateService {
     private final EstateRepository estateRepository;
     private final List<Estate> activeEstateList;
     private final List<Estate> passiveEstateList;
-    private  final List<Estate> requiredEstate;
+    private final List<Estate> requiredEstate;
 
     @Autowired
     public EstateService(EstateRepository estateRepository) {
@@ -26,7 +26,7 @@ public class EstateService {
         requiredEstate = new ArrayList<>();
     }
     @Transactional
-    public List getAllEstate(){return activeEstateList;}
+    public List getAllActiveEstate(){return activeEstateList;}
     public List<Estate> getActiveEstateList(String decodedId) {return activeEstateList; }
     List<Estate> getPassiveEstateList() {return passiveEstateList;}
     List<Estate> getRequiredEstate() { return  requiredEstate;}
@@ -40,7 +40,7 @@ public class EstateService {
 
         if(passiveEstateList.contains(estate)) {
             passiveEstateList.remove(estate);
-            return;
+            return; 
         }
 
         throw new RuntimeException("Not found");
@@ -97,7 +97,7 @@ public class EstateService {
 
     @Transactional
     public void addEstate(Estate estate, String address){
-        if(EstateRepository.findEstateByAddress(estate.getAddress()) != null){
+        if(estateRepository.findEstateByAddress(estate.getAddress()) != null){
             estateRepository.save(estate);
         }
     }

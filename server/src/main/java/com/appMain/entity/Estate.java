@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.util.Objects;
 import java.util.UUID;
 
+@SuppressWarnings("JpaAttributeTypeInspection")
 @Entity
 public class Estate {
 
@@ -23,8 +24,11 @@ public class Estate {
     private Double rooms;
 /*
     private ArrayList<Estate> estateWishList;
-*/  @JsonBackReference
+*//*  @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "realtor_id")*/
+    @JsonBackReference
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "realtor_id")
     private Realtor realtor;
 // Constructors
@@ -100,7 +104,7 @@ public class Estate {
     public String toString() {
         return "Estate {" +
                 "id=" + id +
-                ", adress='" + address + '\'' +
+                ", address='" + address + '\'' +
                 ", type='" + type + '\'' +
                 ", price=" + price +
                 *//*", estateWishList=" + estateWishList +*//*

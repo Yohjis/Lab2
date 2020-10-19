@@ -10,10 +10,5 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public interface DealRepository extends  JpaRepository<Deal, UUID>{
-    Deal getDeal();
-    Double getRealtor();
-    Client getClient();
-    LocalDateTime getDealDate();
-    Double countPrice();
-    ArrayList<Estate> getEstateInDeal();
+
 }
